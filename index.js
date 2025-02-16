@@ -1,5 +1,5 @@
 import express from 'express';
-import axios from 'axios'; // Use axios for HTTP requests
+import axios from 'axios'; 
 const app = express();
 const port = 3000;
 import cors from 'cors';
@@ -7,18 +7,18 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 dotenv.config();
 
-// Middleware to parse JSON (if needed)
+
 app.use(express.json());
 app.use(cors({
   origin: '*',
 }));
 
-// Root route
+
 app.get('/', (req, res) => {
   res.send('App is running');
 });
 
-// Token refresh endpoint
+
 app.get('/token', async (req, res) => {
   try {
     const response = await axios.post(
@@ -39,8 +39,7 @@ app.get('/token', async (req, res) => {
     const data = response.data;
 
     if (data.access_token) {
-      // Optionally store the token in memory or a database
-      // For simplicity, we'll just return it here
+
       res.json({ success: true, access_token: data.access_token });
     } else {
       res.status(400).json({ success: false, message: "No access token received" });
@@ -51,9 +50,7 @@ app.get('/token', async (req, res) => {
   }
 });
 
-// Start the server
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
-  console.log(process.env.CLIENT_ID);
-  console.log(process.env.CLIENT_SECRET);
 });
