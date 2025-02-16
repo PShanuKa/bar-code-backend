@@ -1,7 +1,10 @@
-const express = require('express');
-const axios = require('axios'); // Use axios for HTTP requests
+import express from 'express';
+import axios from 'axios'; // Use axios for HTTP requests
 const app = express();
 const port = 3000;
+
+import dotenv from 'dotenv';
+dotenv.config();
 
 // Middleware to parse JSON (if needed)
 app.use(express.json());
@@ -18,8 +21,8 @@ app.get('/token', async (req, res) => {
       "https://login.microsoftonline.com/fa51c2d9-b92c-4ee0-8186-a8733f338c47/oauth2/v2.0/token",
       new URLSearchParams({
         grant_type: "client_credentials",
-        client_id: "7e53abf2-255e-4ff6-a68d-d674c6571d3a",
-        client_secret: "xno8Q~l~kYNh7cVGsFniCBOryvEmAIdhfcHMlcgh",
+        client_id: process.env.CLIENT_ID,
+        client_secret: process.env.CLIENT_SECRET,
         scope: "https://api.businesscentral.dynamics.com/.default",
       }),
       {
