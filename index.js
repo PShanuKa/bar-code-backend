@@ -50,4 +50,6 @@ app.get('/token', async (req, res) => {
 // Start the server
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
+  console.log(process.env.CLIENT_ID);
+  console.log(process.env.CLIENT_SECRET);
 });
