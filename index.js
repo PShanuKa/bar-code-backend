@@ -2,12 +2,16 @@ import express from 'express';
 import axios from 'axios'; // Use axios for HTTP requests
 const app = express();
 const port = 3000;
+import cors from 'cors';
 
 import dotenv from 'dotenv';
 dotenv.config();
 
 // Middleware to parse JSON (if needed)
 app.use(express.json());
+app.use(cors({
+  origin: '*',
+}));
 
 // Root route
 app.get('/', (req, res) => {
