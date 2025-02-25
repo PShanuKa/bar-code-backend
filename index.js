@@ -14,6 +14,11 @@ app.use(
   })
 );
 
+if (!process.env.CLIENT_ID || !process.env.CLIENT_SECRET) {
+  console.error("Missing required environment variables: CLIENT_ID or CLIENT_SECRET");
+  process.exit(1); 
+}
+
 app.get("/", (req, res) => {
   res.send("App is running");
 });
@@ -74,9 +79,14 @@ app.get("/subscription/:token", async (req, res) => {
   }
 });
 
-// not found
+
 app.use((req, res) => {
   res.status(404).json({ success: false, message: "Route not found" });
+});
+
+app.use((err, req, res, next) => {
+  console.error("Error:", err.message);
+  res.status(500).json({ success: false, message: "Internal Server Error" });
 });
 
 app.listen(port, () => {
