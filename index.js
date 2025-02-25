@@ -61,8 +61,8 @@ app.get("/subscription/:token", async (req, res) => {
 
     const data = {
       subscriptionId: "1234567890",
-      availableDate: "2",
-      access : false
+      availableDate: 15,
+      access : true
 
     }
     res.json({ success: true, message: "Subscription data", data });
