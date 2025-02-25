@@ -74,6 +74,11 @@ app.get("/subscription/:token", async (req, res) => {
   }
 });
 
+// not found
+app.use((req, res) => {
+  res.status(404).json({ success: false, message: "Route not found" });
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
