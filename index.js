@@ -20,7 +20,7 @@ if (!process.env.CLIENT_ID || !process.env.CLIENT_SECRET) {
 }
 
 app.get("/", (req, res) => {
-  res.send("App is running");
+  res.send("App is runningg");
 });
 
 app.get("/token", async (req, res) => {
