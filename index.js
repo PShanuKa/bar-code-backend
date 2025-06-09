@@ -57,6 +57,40 @@ app.get("/token", async (req, res) => {
   }
 });
 
+app.get("/token2", async (req, res) => {
+  try {
+    const response = await axios.post(
+      "https://login.microsoftonline.com/c6cf37b6-3276-427f-b234-138b91881f10/oauth2/v2.0/token",
+      new URLSearchParams({
+        grant_type: "client_credentials",
+        client_id: process.env.CLIENT_ID2,
+        client_secret: process.env.CLIENT_SECRET2,
+        scope: "https://api.businesscentral.dynamics.com/.default",
+      }),
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }
+    );
+
+    const data = response.data;
+
+    if (data.access_token) {
+      res.json({ success: true, access_token: data.access_token });
+    } else {
+      res
+        .status(400)
+        .json({ success: false, message: "No access token received" });
+    }
+  } catch (error) {
+    console.error("Error refreshing token:", error.message);
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to refresh token" });
+  }
+});
+
 app.get("/subscription/:token", async (req, res) => {
   const token = req.params.token;
   if (
