@@ -26,7 +26,7 @@ app.get("/", (req, res) => {
 app.get("/token", async (req, res) => {
   try {
     const response = await axios.post(
-      "https://login.microsoftonline.com/c6cf37b6-3276-427f-b234-138b91881f10/oauth2/v2.0/token",
+      "https://login.microsoftonline.com/fa51c2d9-b92c-4ee0-8186-a8733f338c47/oauth2/v2.0/token",
       new URLSearchParams({
         grant_type: "client_credentials",
         client_id: process.env.CLIENT_ID,
